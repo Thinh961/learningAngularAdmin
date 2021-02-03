@@ -1,0 +1,14 @@
+.edit-btn {
+  color: rgba(74, 171, 228, 0.801);
+  font-size: 150%;
+  margin-right: 3px;
+  font-weight: 200;
+}
+.delete-btn {
+  color: rgba(241, 77, 77, 0.808);
+  font-size:  140%;
+  font-weight: 200;
+}
+.modal-content{
+  width: 130%;
+}

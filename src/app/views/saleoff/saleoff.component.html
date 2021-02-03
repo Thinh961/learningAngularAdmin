@@ -1,0 +1,204 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <!--/.col-->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Khuyến mại
+            <span type="button" class="btn btn-success"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            style="float: right;">
+            Thêm mới
+            </span>
+          </h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>HÌNH ẢNH</th>
+                <th>TÊN</th>
+                <th>MỚI</th>
+                <th>HOT</th>
+                <th>ĐIỂM</th>
+                <th>TRẠNG THÁI</th>
+                <th>TÁC VỤ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="../../../assets/img/brand/hachinet.png" alt="" width="100px"></td>
+                <td>[MIỀN BẮC] Ơ MÂY ZING GÚT CHÓP <br> ĂN LẨU GIÁ CỰC HOT </td>
+                <td>
+                  <span class="badge badge-info">Mới</span>
+                </td>
+                <td>
+                  <span class="badge badge-secondary">Hot</span>
+                </td>
+                <td>0</td>
+                <td>
+                  <span class="badge badge-success">Kích hoạt</span>
+                </td>
+                <td>
+                  <i class="fas fa-edit edit-btn"></i>
+                  <i class="fas fa-trash-alt delete-btn"></i>
+                </td>
+              </tr>
+              <tr *ngFor="let i of listItem | paginate : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              };">
+                <td><img src={{i.images}} alt="" width="100px"></td>
+                <td width="265px"> {{i.name}} </td>
+                <td>
+                  <span class="badge badge-info" *ngIf="i.new">Mới</span>
+                </td>
+                <td>
+                  <span class="badge badge-secondary" *ngIf="i.hot">Hot</span>
+                </td>
+                <td>{{i.scores}}</td>
+                <td>
+                  <span class="badge badge-success" *ngIf="i.status">Kích hoạt</span>
+                </td>
+                <td>
+                  <i class="fas fa-edit edit-btn"></i>
+                  <i class="fas fa-trash-alt delete-btn" (click)="smallModal.show()"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-center">
+            <pagination-controls
+              responsive="true"
+              previousLabel="Prev"
+              nextLabel="Next"
+              (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+          </div>
+
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>
+
+
+
+<!-- popup addproduct -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="exampleModalLabel">Chi tiết</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <!-- img  -->
+          <!-- <div class="form-group row">
+            <label class="col-md-3 col-form-label">Static</label>
+            <div class="col-md-9">
+              <p class="form-control-static">Username</p>
+            </div>
+          </div> -->
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="text-input">Tên</label>
+            <div class="col-md-9">
+              <input type="text" id="text-input" name="text-input" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="textarea-input">Mô tả ngắn</label>
+            <div class="col-md-9">
+              <textarea id="textarea-input" name="textarea-input" rows="6" class="form-control"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="select1">Khu vực</label>
+            <div class="col-md-9">
+              <select id="select1" name="select1" class="form-control">
+                <option value="0">Chọn khu vực</option>
+                <option value="1">Option #1</option>
+                <option value="2">Option #2</option>
+                <option value="3">Option #3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="select1">Mô hình</label>
+            <div class="col-md-9">
+              <select id="select1" name="select1" class="form-control">
+                <option value="0"></option>
+                <option value="1">Option #1</option>
+                <option value="2">Option #2</option>
+                <option value="3">Option #3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Địa chỉ</label>
+            <div class="col-md-9">
+              <input type="text" id="address" name="address" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Điện thoại</label>
+            <div class="col-md-9">
+              <input type="text" id="phone" name="phone" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="email-input">Website</label>
+            <div class="col-md-9">
+              <input type="email" id="text-input" name="text-input" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="date-input">Mở cửa</label>
+            <div class="col-md-9">
+              <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary">Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- popup delete item -->
+<div bsModal #smallModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Xác nhận</h4>
+        <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn xóa không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="smallModal.hide()">&emsp;Hủy&emsp;</button>
+        <button type="button" class="btn btn-primary" >&ensp;Đồng ý&ensp;</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
